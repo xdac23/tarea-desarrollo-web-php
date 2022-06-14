@@ -172,32 +172,34 @@ if (isset($_POST["input_strings"])){
     $arraysVisibility = "display:none;";
     $stringsVisibility = "";
 
-    $inputStrings = $_POST["input_arrays"];  
+    $inputStrings = $_POST["input_strings"];  
+
+    $substring = substr_count($inputStrings, "a");
+
+    $replaceString = str_replace("e", "PHP", $inputStrings);
+
+    $lenString = strlen($inputStrings);
     
-    $myArray = array();
-    for ($i = 0; $i < $inputArrays; $i++){
-        $myArray[$i] = "El valor es {$i}";
-    }
+    // $stringRepeat = $str_repeat("hola", 3);   
 
-    $stringValues = "";
-    foreach ($myArray as $k => $v) {
-        $stringValues .=  "\$myArray[$k] => $v"."<br>";
-    }
+    $messageStrings = <<<EOT
+        <h3> Ingresaste la cadena "{$inputStrings}" </h3>
+        <h4>Utilización de funciones de cadenas</h4>
+        <p>PHP cuenta con una gran cantidad de funciones integradas que permiten manipular las cadenas de caracteres. 
+        A continuación se muestran los resultados de la aplicación de algunas de estas funciones: <br><br>
 
+        1. Empleando la función substr_repeat() para encontrar cuantas veces contiene la letra "a" la cadena ingresada: <br>
+        substr_repeat("myString", "a") = {$substring} <br><br>
 
-    $messageArrays = <<<EOT
-        <h3> Ingresaste el número {$inputArrays} </h3>
-        <h4>Ejemplo de arreglo</h4>
-        <p>Este fragmento de código crea un arreglo del tamaño del número ingresado, los índices comienzan desde 0 hasta el número ingresado y las llaves consisten
-        en una cadena de caracteres concatenada a su propio índice. Se emplea tambien un ciclo foreach para imprimir cada valor con su respectiva llave: <br> {$stringValues}</p>
-        Nota: Si se introdujo un número mayor que 10 o negativo, se asignará automáticamente el número 10.    
+        2. Empleando la funcion str_replace() para reemplazar las letras "e" por la palabra "PHP": <br>
+        str_replace("e","PHP","myString") = {$replaceString} <br><br>
+
+        3. Empleando la funcion lenString() para obtener la cantidad de caracteres de la cadena: <br>
+        strlen("myString") = {$lenString} <br><br>
+
+        </p>
         EOT;
 }
-
-
-
-
-
 
   //Se implementa una funcion recursiva
   function factorial($number) {
